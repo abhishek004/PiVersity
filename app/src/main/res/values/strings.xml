@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PiVersity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_signup">signup</string>
+    <string name="title_activity_sign_in">SignIn</string>
+    <string name="title_activity_student_admin">StudentAdmin</string>
+    <string name="title_activity_student_edit">StudentEdit</string>
+    <string name="title_activity_institute_admin">InstituteAdmin</string>
+    <string name="title_activity_page_admin">PageAdmin</string>
+    <string name="title_activity_add_page">AddPage</string>
+    <string name="title_activity_institute_edit">InstituteEdit</string>
+    <string name="title_activity_add_update">AddUpdate</string>
+</resources>

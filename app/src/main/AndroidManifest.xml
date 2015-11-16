@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="iiitd.piversity" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".application.StarterApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="YOUR_APPLICATION_ID" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="YOUR_CLIENT_KEY" />
+
+        <activity
+            android:name=".otherActivities.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".otherActivities.SignUp"
+            android:label="Sign Up"
+            android:parentActivityName=".otherActivities.MainActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".otherActivities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".otherActivities.SignIn"
+            android:label="@string/title_activity_sign_in"
+            android:parentActivityName=".otherActivities.MainActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".otherActivities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".adminActivities.StudentAdmin"
+            android:label="PiVersity" >
+        </activity>
+        <activity
+            android:name=".adminActivities.StudentEdit"
+            android:label="Edit Profile"
+            android:parentActivityName=".adminActivities.StudentAdmin" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".adminActivities.StudentAdmin" />
+        </activity>
+        <activity
+            android:name=".adminActivities.InstituteAdmin"
+            android:label="PiVersity" >
+        </activity>
+        <activity
+            android:name=".adminActivities.PageAdmin"
+            android:label="@string/title_activity_page_admin" >
+        </activity>
+        <activity
+            android:name=".adminActivities.AddPage"
+            android:label="@string/title_activity_add_page"
+            android:parentActivityName=".adminActivities.InstituteAdmin" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".adminActivities.InstituteAdmin" />
+        </activity>
+        <activity
+            android:name=".adminActivities.InstituteEdit"
+            android:label="@string/title_activity_institute_edit" >
+        </activity>
+        <activity
+            android:name=".adminActivities.AddUpdate"
+            android:label="@string/title_activity_add_update" >
+        </activity>
+    </application>
+
+</manifest>
