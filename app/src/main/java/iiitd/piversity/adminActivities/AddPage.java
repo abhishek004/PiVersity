@@ -75,6 +75,7 @@ public class AddPage extends AppCompatActivity implements View.OnClickListener {
                         p.setInfo(String.valueOf(des.getText()));
                         p.setAdmin(ParseUser.getCurrentUser());
                         p.setType(extras.getString("type"));
+                        p.setOwner(ParseUser.getCurrentUser().getObjectId());
                         p.saveInBackground();
                         //Toast.makeText(StudentEdit.this, "Data Received", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(AddPage.this, InstituteAdmin.class);

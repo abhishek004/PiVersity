@@ -1,15 +1,17 @@
 package iiitd.piversity.otherActivities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseUser;
 
 import iiitd.piversity.R;
+import iiitd.piversity.adminActivities.StudentAdmin;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,6 +23,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.orgButton).setOnClickListener(this);
         findViewById(R.id.signupButton).setOnClickListener(this);
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        //Log.i("XXX","CCC" + currentUser.getEmail());
+        if (currentUser.getEmail()!=null) {
+            Intent intent = new Intent(MainActivity.this, StudentAdmin.class);
+            startActivity(intent);
+            finish();
+            /*if (currentUser.get("type").equals("org")) {
+                Intent intent = new Intent(MainActivity.this, InstituteAdmin.class);
+                startActivity(intent);
+                finish();
+            }
+            else{
+                Intent intent = new Intent(MainActivity.this, StudentAdmin.class);
+                startActivity(intent);
+                finish();
+            }*/
+        }
+
     }
 
     @Override

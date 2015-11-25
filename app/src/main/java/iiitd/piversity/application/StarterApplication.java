@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -28,6 +29,7 @@ public class StarterApplication extends Application {
         ParseObject.registerSubclass(PageUpdate.class);
         // Add your initialization code here
         Parse.initialize(this, "fvqPYOyzptieL3fbQqre6QAwLzB0JhkY2nZxtaUl", "g8w9ursbuhaTDbHggRibJ0vxH03uHtB7kNq5DIau");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();

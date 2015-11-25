@@ -18,12 +18,20 @@ public class GroupClubPage extends ParseObject{
         put("name", name);
     }
 
+    public String getOwner() {
+        return getString("owner");
+    }
+    public void setOwner(String owner) {
+        put("owner", owner);
+    }
+
     public ParseUser getAdmin() {
         return getParseUser("admin");
     }
     public void setAdmin(ParseUser admin) {
         put("admin", admin);
     }
+
 
     public String getInfo() {
         return getString("info");

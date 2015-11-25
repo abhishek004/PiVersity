@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.parse.ParsePush;
 import com.parse.ParseUser;
 
 import iiitd.piversity.R;
@@ -63,7 +64,11 @@ public class AddUpdate extends AppCompatActivity implements View.OnClickListener
         p.setInfo(info.getText().toString());
         p.saveInBackground();
         Intent intent = new Intent(this,PageAdmin.class);
-        intent.putExtra("name",extras.getString("pageName"));
+        intent.putExtra("name", extras.getString("pageName"));
+        ParsePush push = new ParsePush();
+        push.setChannel("Test");
+        push.setMessage("The Giants just scored! It's now 2-2 against the Mets.");
+        push.sendInBackground();
         startActivity(intent);
     }
 }

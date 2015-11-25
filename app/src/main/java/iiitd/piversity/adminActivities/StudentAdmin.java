@@ -12,9 +12,10 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -50,6 +51,12 @@ public class StudentAdmin extends AppCompatActivity implements View.OnClickListe
         getData();
         findViewById(R.id.editProfileButton).setOnClickListener(this);
         findViewById(R.id.logoutButton).setOnClickListener(this);
+        ParsePush.subscribeInBackground("Test", new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                Log.e("pNotify", "Successfully subscribed to Parse!");
+            }
+        });
     }
 
     @Override
@@ -86,14 +93,14 @@ public class StudentAdmin extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void getData(){
+    private void getData() {
         ParseQuery<Student> query = ParseQuery.getQuery(Student.class);
         query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<Student>() {
             public void done(List<Student> itemList, ParseException e) {
                 if (e == null) {
                     if (!itemList.isEmpty()) {
-                        Toast.makeText(StudentAdmin.this, "Data Received", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(StudentAdmin.this, "Data Received", Toast.LENGTH_SHORT).show();
                         updateProfile(itemList.get(0));
                     } else {
                         Student s = new Student();
@@ -111,58 +118,24 @@ public class StudentAdmin extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        final ParseUser[] x = new ParseUser[1];
-        ParseObject obj = ParseObject.createWithoutData("User", org);
-        ParseUser user=new ParseUser();
-        user.setObjectId(org);
-        /*
-        ParseQuery<Institute> query3 = ParseQuery.getQuery(Institute.class);
-        query3.whereEqualTo("objectId", org);
-        query3.findInBackground(new FindCallback<Institute>() {
-            public void done(List<Institute> itemList, ParseException e) {
-                if (e == null) {
-                    if(!itemList.isEmpty()){
-                        x[0] = itemList.get(0);
-                        Toast.makeText(StudentAdmin.this, "Pages found", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(StudentAdmin.this, "Pages Not Found", Toast.LENGTH_SHORT).show();
-
-                    }
-                    // Access the array of results here
-                    //String firstItemId = itemList.get(0).getObjectId();
-
-                } else {
-                    Log.e("item", "Error: " + e.getMessage());
-                }
-            }
-        });
-*/
-        ParseQuery innerQuery = ParseUser.getQuery();
-        innerQuery.whereEqualTo("objectId", org);
+        ParseQuery<ParseUser> innerQuery = ParseUser.getQuery();
+        innerQuery.whereEqualTo("username", "iiitd");
 
         ParseQuery<GroupClubPage> query2 = ParseQuery.getQuery(GroupClubPage.class);
-        query2.whereMatchesQuery("admin",innerQuery);
-        //query2.whereEqualTo("admin", innerQuery);
+        query2.whereMatchesQuery("admin", innerQuery);
         query2.findInBackground(new FindCallback<GroupClubPage>() {
-            public void done(List<GroupClubPage> itemList, ParseException e) {
+            public void done(List<GroupClubPage> itemList2, ParseException e) {
                 if (e == null) {
-                    if(!itemList.isEmpty()){
-                        Toast.makeText(StudentAdmin.this, "Pages found", Toast.LENGTH_SHORT).show();
+                    if (!itemList2.isEmpty()) {
+                        Toast.makeText(StudentAdmin.this, "Data Received" + itemList2.get(0).getName(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(StudentAdmin.this, "No pages found", Toast.LENGTH_SHORT).show();
                     }
-                    else{
-                        Toast.makeText(StudentAdmin.this, "Pages Not Found", Toast.LENGTH_SHORT).show();
-
-                    }
-                    // Access the array of results here
-                    //String firstItemId = itemList.get(0).getObjectId();
-
                 } else {
                     Log.e("item", "Error: " + e.getMessage());
                 }
             }
         });
-
     }
 
     private void updateProfile(Student s){
