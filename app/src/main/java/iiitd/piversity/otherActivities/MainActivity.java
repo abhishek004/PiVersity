@@ -3,6 +3,7 @@ package iiitd.piversity.otherActivities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ParseUser currentUser = ParseUser.getCurrentUser();
         //Log.i("XXX","CCC" + currentUser.getEmail());
         if (currentUser.getEmail()!=null) {
-            if(currentUser.get("type") == "org"){
+            Log.d("!!!!!!!!", currentUser.get("type").toString());
+            if(currentUser.get("type").toString().equals("org")){
                 Intent intent = new Intent(MainActivity.this, AdminHome.class);
                 startActivity(intent);
                 finish();

@@ -28,6 +28,7 @@ import com.parse.ParseUser;
 import java.util.List;
 
 import iiitd.piversity.R;
+import iiitd.piversity.adminActivities.PageAdmin;
 import iiitd.piversity.adminActivities.StudentAdmin;
 import iiitd.piversity.adminActivities.StudentEdit;
 import iiitd.piversity.newAdminActivities.Clubs.ClubsContent;
@@ -156,7 +157,9 @@ public class StudentHome extends AppCompatActivity implements updatesFragment.On
     public void onGroupsListFragmentInteraction(GroupsContent.GroupsItem item){
         //some code here too.
         Toast.makeText(StudentHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
-
+        Intent intent = new Intent(this, PageAdmin.class);
+        intent.putExtra("name", item.content);
+        startActivity(intent);
     }
 
     @Override
@@ -285,8 +288,6 @@ public class StudentHome extends AppCompatActivity implements updatesFragment.On
                 case 1:
                     return GroupsFragment.newInstance(position + 1);
 
-                case 2:
-                    return ClubsFragment.newInstance(position + 1);
 
             }
             return PlaceholderFragment.newInstance(position + 1);
@@ -295,7 +296,7 @@ public class StudentHome extends AppCompatActivity implements updatesFragment.On
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -304,9 +305,7 @@ public class StudentHome extends AppCompatActivity implements updatesFragment.On
                 case 0:
                     return "Updates";
                 case 1:
-                    return "Groups";
-                case 2:
-                    return "Clubs";
+                    return "Groups/Clubs";
             }
             return null;
         }

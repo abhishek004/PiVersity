@@ -31,7 +31,9 @@ import java.util.List;
 
 import iiitd.piversity.R;
 import iiitd.piversity.adminActivities.AddPage;
+import iiitd.piversity.adminActivities.InstituteAdmin;
 import iiitd.piversity.adminActivities.InstituteEdit;
+import iiitd.piversity.adminActivities.PageAdmin;
 import iiitd.piversity.adminActivities.StudentEdit;
 import iiitd.piversity.newAdminActivities.Clubs.ClubsContent;
 import iiitd.piversity.newAdminActivities.Groups.GroupsContent;
@@ -39,7 +41,7 @@ import iiitd.piversity.otherActivities.MainActivity;
 import iiitd.piversity.parseModels.Institute;
 import iiitd.piversity.parseModels.Student;
 
-public class AdminHome extends AppCompatActivity implements GroupsFragment.OnGroupsListFragmentInteractionListener, ClubsFragment.OnClubsListFragmentInteractionListener{
+public class AdminHome extends AppCompatActivity implements GroupsFragment.OnGroupsListFragmentInteractionListener{
 
 
     Boolean initialEdit = false;
@@ -119,7 +121,7 @@ public class AdminHome extends AppCompatActivity implements GroupsFragment.OnGro
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_profile) {
-            Intent intent = new Intent(AdminHome.this, InstituteEdit.class);
+            Intent intent = new Intent(AdminHome.this, InstituteAdmin.class);
             startActivity(intent);
         }
 
@@ -139,15 +141,13 @@ public class AdminHome extends AppCompatActivity implements GroupsFragment.OnGro
     @Override
     public void onGroupsListFragmentInteraction(GroupsContent.GroupsItem item){
         //some code here too.
+       // Toast.makeText(StudentHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, PageAdmin.class);
+        intent.putExtra("name", item.content);
+        startActivity(intent);
         Toast.makeText(AdminHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onClubsListFragmentInteraction(ClubsContent.ClubsItem item){
-        //some code here too please.
-        Toast.makeText(AdminHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
-
-    }
 
     private void getData() {
         ParseQuery<Institute> query = ParseQuery.getQuery(Institute.class);
@@ -256,7 +256,9 @@ public class AdminHome extends AppCompatActivity implements GroupsFragment.OnGro
                 case 0:
                     return GroupsFragment.newInstance(position + 1);
                 case 1:
-                    return ClubsFragment.newInstance(position + 1);
+                    return AddGroupFragment.newInstance();
+                case 2:
+                    return PlaceholderFragment.newInstance(position + 1);
             }
             return PlaceholderFragment.newInstance(position + 1);
         }
@@ -271,9 +273,11 @@ public class AdminHome extends AppCompatActivity implements GroupsFragment.OnGro
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Groups";
+                    return "Groups/Clubs";
                 case 1:
-                    return "Clubs";
+                    return "Create Group";
+                case 2:
+                    return "Create Update";
             }
             return null;
         }

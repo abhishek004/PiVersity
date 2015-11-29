@@ -88,9 +88,9 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".adminActivities.AddPage"
-            android:theme="@style/AppTheme.Dark"
             android:label="@string/title_activity_add_page"
-            android:parentActivityName=".adminActivities.InstituteAdmin">
+            android:parentActivityName=".adminActivities.InstituteAdmin"
+            android:theme="@style/AppTheme.Dark">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".adminActivities.InstituteAdmin" />
@@ -135,6 +135,10 @@
         <activity
             android:name=".newAdminActivities.AdminHome"
             android:label="@string/title_activity_admin_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".newAdminActivities.StudentPageAdmin"
+            android:label="@string/title_activity_student_page_admin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

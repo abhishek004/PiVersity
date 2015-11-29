@@ -1,15 +1,16 @@
-package iiitd.piversity.adminActivities;
+package iiitd.piversity.newAdminActivities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,32 +25,24 @@ import iiitd.piversity.R;
 import iiitd.piversity.parseModels.GroupClubPage;
 import iiitd.piversity.parseModels.PageUpdate;
 
-public class PageAdmin extends AppCompatActivity implements View.OnClickListener {
-
+public class StudentPageAdmin extends AppCompatActivity {
     Bundle extras;
     TextView name;
     TextView des;
     String pageId;
     LinearLayout updateContainer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_admin);
+        setContentView(R.layout.activity_student_page_admin);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         extras = getIntent().getExtras();
         name=(TextView)findViewById(R.id.namePageAdmin);
         des=(TextView)findViewById(R.id.desPageAdmin);
-        Button editButton = (Button) findViewById(R.id.editButtonPageAdmin);
-        Button addupdateButton = (Button) findViewById(R.id.addButtonPageAdmin);
-
         getPage(extras.getString("name"));
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if(!currentUser.get("type").toString().equals("org")){
-            editButton.setVisibility(View.GONE);
-            addupdateButton.setVisibility(View.GONE);
-        }
         updateContainer = (LinearLayout)findViewById(R.id.updatesContainer);
-        findViewById(R.id.addButtonPageAdmin).setOnClickListener(this);
+        //findViewById(R.id.addButtonPageAdmin).setOnClickListener(this);
     }
 
     private void getPage(String name){
@@ -73,7 +66,6 @@ public class PageAdmin extends AppCompatActivity implements View.OnClickListener
             }
         });
     }
-
     private void setPage(GroupClubPage p){
         name.setText(p.getName());
         des.setText(p.getInfo());
@@ -108,6 +100,7 @@ public class PageAdmin extends AppCompatActivity implements View.OnClickListener
             updateContainer.addView(addView);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -130,13 +123,4 @@ public class PageAdmin extends AppCompatActivity implements View.OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId()==R.id.addButtonPageAdmin){
-            Intent intent = new Intent(PageAdmin.this, AddUpdate.class);
-            intent.putExtra("pageId",pageId);
-            intent.putExtra("pageName",extras.getString("name"));
-            startActivity(intent);
-        }
-    }
 }

@@ -9,14 +9,18 @@
         android:id="@+id/updatescontent"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
         android:id="@+id/updatesid"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
         android:textAppearance="?attr/textAppearanceListItem"
         />
 

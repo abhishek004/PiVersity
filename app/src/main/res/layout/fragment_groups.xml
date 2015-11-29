@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@xml/textlines">
 
     <!--<TextView-->
         <!--android:id="@+id/groupsid"-->
@@ -10,11 +11,13 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_margin="@dimen/text_margin_large"-->
         <!--android:textAppearance="?attr/textAppearanceListItem" />-->
-
     <TextView
         android:id="@+id/groupscontent"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="15dp"
         android:textAppearance="?attr/textAppearanceListItem" />
+
 </LinearLayout>
