@@ -12,10 +12,8 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -51,12 +49,12 @@ public class StudentAdmin extends AppCompatActivity implements View.OnClickListe
         getData();
         findViewById(R.id.editProfileButton).setOnClickListener(this);
         findViewById(R.id.logoutButton).setOnClickListener(this);
-        ParsePush.subscribeInBackground("Test", new SaveCallback() {
+        /*ParsePush.subscribeInBackground("Test", new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 Log.e("pNotify", "Successfully subscribed to Parse!");
             }
-        });
+        });*/
     }
 
     @Override

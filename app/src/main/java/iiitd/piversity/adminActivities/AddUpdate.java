@@ -66,9 +66,29 @@ public class AddUpdate extends AppCompatActivity implements View.OnClickListener
         Intent intent = new Intent(this,PageAdmin.class);
         intent.putExtra("name", extras.getString("pageName"));
         ParsePush push = new ParsePush();
-        push.setChannel("Test");
-        push.setMessage("The Giants just scored! It's now 2-2 against the Mets.");
+        push.setChannel(extras.getString("pageName"));
+        push.setMessage(info.getText().toString());
         push.sendInBackground();
+        /*ParseQuery<GroupClubPage> query = ParseQuery.getQuery(GroupClubPage.class);
+        query.whereEqualTo("user", ParseUser.getCurrentUser());
+        query.findInBackground(new FindCallback<GroupClubPage>() {
+            public void done(List<GroupClubPage> itemList, ParseException e) {
+                if (e == null) {
+                    if (!itemList.isEmpty()) {
+                        ParsePush push = new ParsePush();
+                        push.setChannel(itemList.get(0).getName());
+                        push.setMessage(info.getText().toString());
+                        push.sendInBackground();
+                    }
+                    // Access the array of results here
+                    //String firstItemId = itemList.get(0).getObjectId();
+
+                } else {
+                    Log.e("item", "Error: " + e.getMessage());
+                }
+            }
+        });*/
+
         startActivity(intent);
     }
 }

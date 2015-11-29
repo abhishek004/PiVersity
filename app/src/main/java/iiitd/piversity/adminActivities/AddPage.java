@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -76,6 +77,9 @@ public class AddPage extends AppCompatActivity implements View.OnClickListener {
                         p.setAdmin(ParseUser.getCurrentUser());
                         p.setType(extras.getString("type"));
                         p.setOwner(ParseUser.getCurrentUser().getObjectId());
+                        ParseACL acl = new ParseACL();
+                        acl.setPublicReadAccess(true);
+                        p.setACL(acl);
                         p.saveInBackground();
                         //Toast.makeText(StudentEdit.this, "Data Received", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(AddPage.this, InstituteAdmin.class);

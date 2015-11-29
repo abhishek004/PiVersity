@@ -17,13 +17,17 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import iiitd.piversity.R;
+import iiitd.piversity.parseModels.GroupClubPage;
 import iiitd.piversity.parseModels.Student;
 
 public class StudentEdit extends AppCompatActivity implements View.OnClickListener {
@@ -39,6 +43,9 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
 
     ArrayList<String> availableGroups;
     ArrayList<String> availableClubs;
+    HashMap<String,String> availablePages;
+
+    ArrayList<String> selectedPages;
     ArrayList<String> listGroups;
     ArrayList<String> listClubs;
 
@@ -59,11 +66,14 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
         skills = (EditText)findViewById(R.id.skillsStudentEdit);
         listClubs = new ArrayList<>();
         listGroups = new ArrayList<>();
+        selectedPages = new ArrayList<>();
+        availablePages = new HashMap<>();
         availableClubs = new ArrayList<>();
         availableGroups = new ArrayList<>();
-        setGroupsSpinner();
+        getPages();
+        /*setGroupsSpinner();
         setClubsSpinner();
-        setFields();
+        setFields();*/
         findViewById(R.id.saveButton).setOnClickListener(this);
     }
 
@@ -86,6 +96,44 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getPages(){
+        ParseQuery<ParseUser> innerQuery = ParseUser.getQuery();
+        innerQuery.whereEqualTo("username", "iiitd");
+
+        ParseQuery<GroupClubPage> query2 = ParseQuery.getQuery(GroupClubPage.class);
+        query2.whereMatchesQuery("admin", innerQuery);
+        query2.findInBackground(new FindCallback<GroupClubPage>() {
+            public void done(List<GroupClubPage> itemList2, ParseException e) {
+                if (e == null) {
+                    if (!itemList2.isEmpty()) {
+                        availableGroups.add("Select Group");
+                        availableClubs.add("Select Club");
+                        Log.i("XXX", String.valueOf(itemList2.size()));
+                        for (int i=0;i<itemList2.size();i++){
+                            availablePages.put(itemList2.get(i).getName(),itemList2.get(i).getObjectId());
+                            if(itemList2.get(i).getType().equals("group")){
+                                availableGroups.add(itemList2.get(i).getName());
+                            }
+                            else if(itemList2.get(i).getType().equals("club")){
+                                availableClubs.add(itemList2.get(i).getName());
+                            }
+                        }
+                        availableGroups.add("Clear all selections");
+                        availableClubs.add("Clear all selections");
+                        setGroupsSpinner();
+                        setClubsSpinner();
+                        setFields();
+                        Toast.makeText(StudentEdit.this, "Data Received" + itemList2.get(0).getName(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(StudentEdit.this, "No pages found", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Log.e("item", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 
     private void setFields(){
@@ -124,12 +172,12 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
         });
 
         //addGroups();
-        List<String> list = new ArrayList<String>();
+        /*List<String> list = new ArrayList<String>();
         list.add("Select Group");
         list.add("Administration");
-        list.add("BTech-2013");
-        list.add("Clear all selections");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+        list.add("BTech-2013");*/
+        //availableGroups.add("Clear all selections");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, availableGroups);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         groupsSpinner.setAdapter(dataAdapter);
     }
@@ -145,12 +193,14 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String val = clubsSpinner.getSelectedItem().toString();
+                Log.i("spinnerXX",clubsSpinner.getSelectedItem().toString());
                 if(val.equals("Clear all selections")){
                     listClubs.clear();
                     updateClubs();
                 }
                 else if(!listClubs.contains(val) && !val.equals("Select Club")){
                     listClubs.add(val);
+                    Log.i("spinnerXX", "added");
                     updateClubs();
                 }
             }
@@ -162,15 +212,15 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
         });
 
         //addGroups();
-        List<String> list = new ArrayList<String>();
+        /*List<String> list = new ArrayList<String>();
         list.add("Select Club");
         list.add("FooBar");
         list.add("Byld");
         list.add("Design");
         list.add("Photography");
-        list.add("Astronomy");
-        list.add("Clear all selections");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+        list.add("Astronomy");*/
+        //list.add("Clear all selections");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, availableClubs);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clubsSpinner.setAdapter(dataAdapter);
     }
@@ -188,6 +238,36 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
     }
 
     private void onSaveClicked(){
+        selectedPages.clear();
+        LinkedList<String> channels = new LinkedList<String>();
+
+        //LinkedList<String> temp = new LinkedList<String>();
+        List<String> temp = new ArrayList<String>();
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        int j=0;
+        /*installation.put("channels", selectedPages);
+        installation.saveInBackground();*/
+        for(int i=0;i<listClubs.size();i++){
+            selectedPages.add(availablePages.get(listClubs.get(i)));
+            //ParsePush.subscribeInBackground(availablePages.get(listClubs.get(i)));
+            temp.add(listClubs.get(i));
+        }
+        for(int i=0;i<listGroups.size();i++){
+            selectedPages.add(availablePages.get(listGroups.get(i)));
+            //ParsePush.subscribeInBackground(availablePages.get(listGroups.get(i)));
+            temp.add(listGroups.get(i));
+        }
+        //ParsePush.subscribeInBackground(String.valueOf(temp));
+        Log.i("selectedPages", String.valueOf(selectedPages));
+        installation.put("channels", temp);
+        installation.saveInBackground();
+
+        /*ParsePush.subscribeInBackground(String.valueOf(availableClubs), new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                //Log.e("pNotify", "Successfully subscribed to Parse!");
+            }
+        });*/
         ParseQuery<Student> query = ParseQuery.getQuery(Student.class);
         query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<Student>() {
