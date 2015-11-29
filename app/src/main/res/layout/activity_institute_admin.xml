@@ -60,6 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
+                android:background="@color/primary"
+                android:textColor="@color/white"
                 android:id="@+id/editProfileInstitute"
                 android:layout_marginLeft="200dp"
                 android:layout_gravity="right" />
@@ -101,6 +103,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add"
+                android:background="@color/primary"
+                android:textColor="@color/white"
                 android:id="@+id/addGroupButton"
                 android:layout_marginLeft="230dp" />
 
@@ -110,6 +114,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="72dp"
+
             android:id="@+id/groups"></LinearLayout>
 
         <LinearLayout
@@ -128,6 +133,8 @@
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="match_parent"
+                android:background="@color/primary"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:text="Add"
                 android:id="@+id/addClubButton"
@@ -145,6 +152,8 @@
             android:layout_height="wrap_content"
             android:text="Log Out"
             android:id="@+id/logoutInstitute"
+            android:background="@color/primary"
+            android:textColor="@color/white"
             android:layout_gravity="right" />
 
     </LinearLayout>

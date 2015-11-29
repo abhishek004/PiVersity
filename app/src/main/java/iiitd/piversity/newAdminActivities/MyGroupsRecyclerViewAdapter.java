@@ -7,22 +7,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import iiitd.piversity.R;
-import iiitd.piversity.newAdminActivities.updatesFragment.OnUpdatesListFragmentInteractionListener;
+import iiitd.piversity.newAdminActivities.Groups.GroupsContent;
+import iiitd.piversity.newAdminActivities.GroupsFragment.OnGroupsListFragmentInteractionListener;
 import iiitd.piversity.newAdminActivities.Updates.UpdatesContent.UpdatesItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link UpdatesItem} and makes a call to the
- * specified {@link OnUpdatesListFragmentInteractionListener}.
+ * specified {@link OnGroupsListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyupdatesRecyclerViewAdapter extends RecyclerView.Adapter<MyupdatesRecyclerViewAdapter.ViewHolder> {
+public class MyGroupsRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<UpdatesItem> mValues;
-    private final OnUpdatesListFragmentInteractionListener mListener;
+    private final List<GroupsContent.GroupsItem> mValues;
+    private final OnGroupsListFragmentInteractionListener mListener;
 
-    public MyupdatesRecyclerViewAdapter(List<UpdatesItem> items, OnUpdatesListFragmentInteractionListener listener) {
+    public MyGroupsRecyclerViewAdapter(List<GroupsContent.GroupsItem> items, GroupsFragment.OnGroupsListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -30,7 +31,7 @@ public class MyupdatesRecyclerViewAdapter extends RecyclerView.Adapter<Myupdates
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_updates, parent, false);
+                .inflate(R.layout.fragment_groups, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,7 +47,7 @@ public class MyupdatesRecyclerViewAdapter extends RecyclerView.Adapter<Myupdates
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onUpdatesListFragmentInteraction(holder.mItem);
+                    mListener.onGroupsListFragmentInteraction(holder.mItem);
                 }
             }
         });
@@ -61,13 +62,13 @@ public class MyupdatesRecyclerViewAdapter extends RecyclerView.Adapter<Myupdates
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public UpdatesItem mItem;
+        public GroupsContent.GroupsItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.updatesid);
-            mContentView = (TextView) view.findViewById(R.id.updatescontent);
+            mIdView = (TextView) view.findViewById(R.id.groupsid);
+            mContentView = (TextView) view.findViewById(R.id.groupscontent);
         }
 
         @Override

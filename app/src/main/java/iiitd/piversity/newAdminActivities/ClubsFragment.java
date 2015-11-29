@@ -11,34 +11,33 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import iiitd.piversity.R;
-import iiitd.piversity.newAdminActivities.Updates.UpdatesContent;
-import iiitd.piversity.newAdminActivities.Updates.UpdatesContent.UpdatesItem;
+import iiitd.piversity.newAdminActivities.Clubs.ClubsContent;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnUpdatesListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnClubsListFragmentInteractionListener}
  * interface.
  */
-public class updatesFragment extends Fragment{
+public class ClubsFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnUpdatesListFragmentInteractionListener mListener;
+    private OnClubsListFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public updatesFragment() {
+    public ClubsFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static updatesFragment newInstance(int columnCount) {
-        updatesFragment fragment = new updatesFragment();
+    public static ClubsFragment newInstance(int columnCount) {
+        ClubsFragment fragment = new ClubsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -57,7 +56,7 @@ public class updatesFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_updates_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_clubs_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -68,7 +67,7 @@ public class updatesFragment extends Fragment{
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyupdatesRecyclerViewAdapter(UpdatesContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyClubsRecyclerViewAdapter(ClubsContent.ITEMS, mListener));
         }
         return view;
     }
@@ -77,8 +76,8 @@ public class updatesFragment extends Fragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnUpdatesListFragmentInteractionListener) {
-            mListener = (OnUpdatesListFragmentInteractionListener) context;
+        if (context instanceof OnClubsListFragmentInteractionListener) {
+            mListener = (OnClubsListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnGroupsListFragmentInteractionListener");
@@ -101,8 +100,8 @@ public class updatesFragment extends Fragment{
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnUpdatesListFragmentInteractionListener {
+    public interface OnClubsListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onUpdatesListFragmentInteraction(UpdatesItem item);
+        void onClubsListFragmentInteraction(ClubsContent.ClubsItem item);
     }
 }

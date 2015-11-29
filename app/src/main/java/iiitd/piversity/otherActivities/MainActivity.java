@@ -12,6 +12,7 @@ import com.parse.ParseUser;
 
 import iiitd.piversity.R;
 import iiitd.piversity.adminActivities.StudentAdmin;
+import iiitd.piversity.newAdminActivities.AdminHome;
 import iiitd.piversity.newAdminActivities.StudentHome;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,10 +28,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ParseUser currentUser = ParseUser.getCurrentUser();
         //Log.i("XXX","CCC" + currentUser.getEmail());
         if (currentUser.getEmail()!=null) {
-
-            Intent intent = new Intent(MainActivity.this, StudentHome.class);
-            startActivity(intent);
-            finish();
+            if(currentUser.get("type") == "org"){
+                Intent intent = new Intent(MainActivity.this, AdminHome.class);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Intent intent = new Intent(MainActivity.this, StudentHome.class);
+                startActivity(intent);
+                finish();
+            }
             /*if (currentUser.get("type").equals("org")) {
                 Intent intent = new Intent(MainActivity.this, InstituteAdmin.class);
                 startActivity(intent);

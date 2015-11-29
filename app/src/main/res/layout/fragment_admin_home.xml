@@ -9,10 +9,4 @@
     tools:context="iiitd.piversity.newAdminActivities.AdminHome$PlaceholderFragment">
 
 
-    <fragment android:name="iiitd.piversity.newAdminActivities.updatesFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/updatesContainer" />
-
-
 </RelativeLayout>

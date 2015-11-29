@@ -2,8 +2,6 @@ package iiitd.piversity.newAdminActivities;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -30,13 +28,15 @@ import com.parse.ParseUser;
 import java.util.List;
 
 import iiitd.piversity.R;
+import iiitd.piversity.adminActivities.StudentAdmin;
 import iiitd.piversity.adminActivities.StudentEdit;
-import iiitd.piversity.newAdminActivities.dummy.DummyContent;
+import iiitd.piversity.newAdminActivities.Clubs.ClubsContent;
+import iiitd.piversity.newAdminActivities.Groups.GroupsContent;
+import iiitd.piversity.newAdminActivities.Updates.UpdatesContent;
 import iiitd.piversity.otherActivities.MainActivity;
-import iiitd.piversity.parseModels.GroupClubPage;
 import iiitd.piversity.parseModels.Student;
 
-public class StudentHome extends AppCompatActivity implements updatesFragment.OnListFragmentInteractionListener{
+public class StudentHome extends AppCompatActivity implements updatesFragment.OnUpdatesListFragmentInteractionListener, GroupsFragment.OnGroupsListFragmentInteractionListener, ClubsFragment.OnClubsListFragmentInteractionListener {
 
 
     Boolean initialEdit = false;
@@ -84,20 +84,17 @@ public class StudentHome extends AppCompatActivity implements updatesFragment.On
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Toast.makeText(StudentHome.this,
-                        "Selected page position: " + position, Toast.LENGTH_SHORT).show();
+                //
             }
 
             @Override
             public void onPageSelected(int position) {
                 mViewPager.setCurrentItem(position);
-                Toast.makeText(StudentHome.this,
-                        "Selected page position: " + position, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                //
             }
         });
 
@@ -131,7 +128,7 @@ public class StudentHome extends AppCompatActivity implements updatesFragment.On
         int id = item.getItemId();
 
         if (id == R.id.action_profile){
-            Intent intent = new Intent(StudentHome.this, StudentEdit.class);
+            Intent intent = new Intent(StudentHome.this, StudentAdmin.class);
             startActivity(intent);
         }
 
@@ -150,8 +147,23 @@ public class StudentHome extends AppCompatActivity implements updatesFragment.On
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item){
+    public void onUpdatesListFragmentInteraction(UpdatesContent.UpdatesItem item){
         //some code here.
+        Toast.makeText(StudentHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGroupsListFragmentInteraction(GroupsContent.GroupsItem item){
+        //some code here too.
+        Toast.makeText(StudentHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onClubsListFragmentInteraction(ClubsContent.ClubsItem item){
+        //some code here too please.
+        Toast.makeText(StudentHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
+
     }
 
     private void getData() {
@@ -271,7 +283,10 @@ public class StudentHome extends AppCompatActivity implements updatesFragment.On
                     return updatesFragment.newInstance(position + 1);
 
                 case 1:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return GroupsFragment.newInstance(position + 1);
+
+                case 2:
+                    return ClubsFragment.newInstance(position + 1);
 
             }
             return PlaceholderFragment.newInstance(position + 1);

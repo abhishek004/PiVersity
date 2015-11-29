@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -29,13 +30,16 @@ import com.parse.ParseUser;
 import java.util.List;
 
 import iiitd.piversity.R;
+import iiitd.piversity.adminActivities.AddPage;
 import iiitd.piversity.adminActivities.InstituteEdit;
 import iiitd.piversity.adminActivities.StudentEdit;
+import iiitd.piversity.newAdminActivities.Clubs.ClubsContent;
+import iiitd.piversity.newAdminActivities.Groups.GroupsContent;
 import iiitd.piversity.otherActivities.MainActivity;
 import iiitd.piversity.parseModels.Institute;
 import iiitd.piversity.parseModels.Student;
 
-public class AdminHome extends AppCompatActivity {
+public class AdminHome extends AppCompatActivity implements GroupsFragment.OnGroupsListFragmentInteractionListener, ClubsFragment.OnClubsListFragmentInteractionListener{
 
 
     Boolean initialEdit = false;
@@ -82,8 +86,17 @@ public class AdminHome extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Integer position = mViewPager.getCurrentItem();
+                Intent intent = new Intent(getBaseContext(), AddPage.class);
+                intent.putExtra("email", ParseUser.getCurrentUser().getEmail());
+                if(position == 0){
+                    intent.putExtra("type","group");
+                    startActivity(intent);
+                } else{
+                    intent.putExtra("type","club");
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -121,6 +134,19 @@ public class AdminHome extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onGroupsListFragmentInteraction(GroupsContent.GroupsItem item){
+        //some code here too.
+        Toast.makeText(AdminHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClubsListFragmentInteraction(ClubsContent.ClubsItem item){
+        //some code here too please.
+        Toast.makeText(AdminHome.this, "List item Clicked", Toast.LENGTH_SHORT).show();
+
     }
 
     private void getData() {
@@ -226,6 +252,12 @@ public class AdminHome extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            switch (position){
+                case 0:
+                    return GroupsFragment.newInstance(position + 1);
+                case 1:
+                    return ClubsFragment.newInstance(position + 1);
+            }
             return PlaceholderFragment.newInstance(position + 1);
         }
 
