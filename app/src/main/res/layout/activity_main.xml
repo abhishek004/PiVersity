@@ -7,17 +7,16 @@
     android:orientation="vertical"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign In as..."
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:textStyle="italic" />
+
+    <ImageView android:src="@mipmap/logo1"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="1dp"
+        android:layout_gravity="center_horizontal" />
+
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Student"
         android:id="@+id/studentButton"
@@ -27,14 +26,24 @@
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Organisation"
         android:id="@+id/orgButton"
         android:layout_gravity="center_horizontal" />
 
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="OR"-->
+        <!--android:textSize="20dp"-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:textStyle="italic" />-->
+
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:id="@+id/signupButton"
