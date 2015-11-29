@@ -18,6 +18,7 @@ import com.parse.ParseUser;
 import java.util.List;
 
 import iiitd.piversity.R;
+import iiitd.piversity.newAdminActivities.AdminHome;
 import iiitd.piversity.parseModels.Institute;
 
 public class InstituteEdit extends AppCompatActivity implements View.OnClickListener {
@@ -52,6 +53,9 @@ public class InstituteEdit extends AppCompatActivity implements View.OnClickList
             email.setText(extras.getString("email"));
             ph.setText(extras.getString("ph"));
             info.setText(extras.getString("info"));
+        } else{
+            name.setText(extras.getString("name"));
+            email.setText(extras.getString("email"));
         }
     }
 
@@ -92,7 +96,7 @@ public class InstituteEdit extends AppCompatActivity implements View.OnClickList
                         s.setUser(ParseUser.getCurrentUser());
                         s.saveInBackground();
                         //Toast.makeText(StudentEdit.this, "Data Received", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(InstituteEdit.this, InstituteAdmin.class);
+                        Intent intent = new Intent(InstituteEdit.this, AdminHome.class);
                         startActivity(intent);
                         //updateProfile(itemList.get(0));
                     }

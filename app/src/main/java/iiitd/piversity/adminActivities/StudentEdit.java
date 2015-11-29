@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import iiitd.piversity.R;
+import iiitd.piversity.newAdminActivities.StudentHome;
 import iiitd.piversity.parseModels.GroupClubPage;
 import iiitd.piversity.parseModels.Student;
 
@@ -146,6 +147,9 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
             projects.setText(extras.getString("projects"));
             exp.setText(extras.getString("exp"));
             skills.setText(extras.getString("skills"));
+        } else{
+            name.setText(extras.getString("name"));
+            email.setText(extras.getString("email"));
         }
     }
 
@@ -286,7 +290,7 @@ public class StudentEdit extends AppCompatActivity implements View.OnClickListen
                         s.setUser(ParseUser.getCurrentUser());
                         s.saveInBackground();
                         //Toast.makeText(StudentEdit.this, "Data Received", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(StudentEdit.this, StudentAdmin.class);
+                        Intent intent = new Intent(StudentEdit.this, StudentHome.class);
                         startActivity(intent);
                         //updateProfile(itemList.get(0));
                     }

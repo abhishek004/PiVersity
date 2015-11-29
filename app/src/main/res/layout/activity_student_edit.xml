@@ -120,9 +120,10 @@
                 android:id="@+id/skillsStudentEdit" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Save"
+                android:background="@color/primary_dark"
                 android:id="@+id/saveButton"
                 android:layout_gravity="center_horizontal" />
 

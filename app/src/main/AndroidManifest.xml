@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="iiitd.piversity" >
+    package="iiitd.piversity">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,19 +13,19 @@
     <!--
           IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
           to match your app's package name + ".permission.C2D_MESSAGE".
-        -->
-    <permission android:protectionLevel="signature"
-        android:name="iiitd.piversity.permission.C2D_MESSAGE" />
+    -->
+    <permission
+        android:name="iiitd.piversity.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="iiitd.piversity.permission.C2D_MESSAGE" />
+
     <application
         android:name=".application.StarterApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-
-
-
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="fvqPYOyzptieL3fbQqre6QAwLzB0JhkY2nZxtaUl" />
@@ -33,12 +33,10 @@
             android:name="com.parse.CLIENT_KEY"
             android:value="g8w9ursbuhaTDbHggRibJ0vxH03uHtB7kNq5DIau" />
 
-
         <activity
             android:name=".otherActivities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Dark">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +58,7 @@
             android:name=".otherActivities.SignIn"
             android:label="@string/title_activity_sign_in"
             android:parentActivityName=".otherActivities.MainActivity"
-            android:theme="@style/AppTheme.Dark" >
+            android:theme="@style/AppTheme.Dark">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -69,43 +67,45 @@
         </activity>
         <activity
             android:name=".adminActivities.StudentAdmin"
-            android:label="PiVersity" >
-        </activity>
+            android:label="PiVersity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".adminActivities.StudentEdit"
             android:label="Edit Profile"
-            android:parentActivityName=".adminActivities.StudentAdmin" >
+            android:parentActivityName=".adminActivities.StudentAdmin"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".adminActivities.StudentAdmin" />
         </activity>
         <activity
             android:name=".adminActivities.InstituteAdmin"
-            android:label="PiVersity" >
-        </activity>
+            android:label="PiVersity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".adminActivities.PageAdmin"
-            android:label="@string/title_activity_page_admin" >
-        </activity>
+            android:label="@string/title_activity_page_admin"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".adminActivities.AddPage"
             android:label="@string/title_activity_add_page"
-            android:parentActivityName=".adminActivities.InstituteAdmin" >
+            android:parentActivityName=".adminActivities.InstituteAdmin">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".adminActivities.InstituteAdmin" />
         </activity>
         <activity
             android:name=".adminActivities.InstituteEdit"
-            android:label="@string/title_activity_institute_edit" >
-        </activity>
+            android:label="@string/title_activity_institute_edit"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".adminActivities.AddUpdate"
-            android:label="@string/title_activity_add_update" >
-        </activity>
+            android:label="@string/title_activity_add_update" />
 
         <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
+
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -115,18 +115,26 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.GcmBroadcastReceiver"
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <!--
-                  IMPORTANT: Change "com.parse.starter" to match your app's package name.
-                -->
+                <!-- IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
                 <category android:name="iiitd.piversity" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".newAdminActivities.StudentHome"
+            android:label="@string/title_activity_student_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".newAdminActivities.AdminHome"
+            android:label="@string/title_activity_admin_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

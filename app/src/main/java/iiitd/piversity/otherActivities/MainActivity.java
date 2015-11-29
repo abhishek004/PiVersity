@@ -12,6 +12,7 @@ import com.parse.ParseUser;
 
 import iiitd.piversity.R;
 import iiitd.piversity.adminActivities.StudentAdmin;
+import iiitd.piversity.newAdminActivities.StudentHome;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ParseUser currentUser = ParseUser.getCurrentUser();
         //Log.i("XXX","CCC" + currentUser.getEmail());
         if (currentUser.getEmail()!=null) {
-            Intent intent = new Intent(MainActivity.this, StudentAdmin.class);
+
+            Intent intent = new Intent(MainActivity.this, StudentHome.class);
             startActivity(intent);
             finish();
             /*if (currentUser.get("type").equals("org")) {

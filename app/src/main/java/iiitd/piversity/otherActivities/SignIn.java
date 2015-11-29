@@ -15,7 +15,8 @@ import com.parse.ParseUser;
 
 import iiitd.piversity.R;
 import iiitd.piversity.adminActivities.InstituteAdmin;
-import iiitd.piversity.adminActivities.StudentAdmin;
+import iiitd.piversity.newAdminActivities.AdminHome;
+import iiitd.piversity.newAdminActivities.StudentHome;
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
@@ -58,7 +59,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    public void onSignUpClicked(){
+    public void onSignUpClicked(View v){
         Intent intent = new Intent(SignIn.this, SignUp.class);
         startActivity(intent);
     }
@@ -74,10 +75,10 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                     if (extras != null) {
                         String value = extras.getString("type");
                         if (value.equals("student")) {
-                            Intent intent = new Intent(SignIn.this, StudentAdmin.class);
+                            Intent intent = new Intent(SignIn.this, StudentHome.class);
                             startActivity(intent);
                         } else {
-                            Intent intent = new Intent(SignIn.this, InstituteAdmin.class);
+                            Intent intent = new Intent(SignIn.this, AdminHome.class);
                             startActivity(intent);
                             Toast.makeText(getApplicationContext(), "You successfully signed in as an Organisation", Toast.LENGTH_LONG).show();
                         }

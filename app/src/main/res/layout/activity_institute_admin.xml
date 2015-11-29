@@ -57,7 +57,7 @@
 
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
                 android:id="@+id/editProfileInstitute"
@@ -98,7 +98,7 @@
 
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add"
                 android:id="@+id/addGroupButton"
@@ -127,7 +127,7 @@
 
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add"
                 android:id="@+id/addClubButton"
@@ -141,7 +141,7 @@
             android:id="@+id/clubs" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Log Out"
             android:id="@+id/logoutInstitute"
