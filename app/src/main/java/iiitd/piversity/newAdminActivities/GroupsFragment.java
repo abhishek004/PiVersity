@@ -6,12 +6,24 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import iiitd.piversity.R;
 import iiitd.piversity.newAdminActivities.Groups.GroupsContent;
+import iiitd.piversity.parseModels.GroupClubPage;
 
 /**
  * A fragment representing a list of Items.
@@ -67,11 +79,19 @@ public class GroupsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyGroupsRecyclerViewAdapter(GroupsContent.ITEMS, mListener));
+            List<GroupsContent.GroupsItem> groupnames = new ArrayList<GroupsContent.GroupsItem>();
+            List x = ParseInstallation.getCurrentInstallation().getList("channels");
+            int position = 0;
+            for(Object a : x){
+                Log.d("###", a.toString());
+                groupnames.add(new GroupsContent.GroupsItem(String.valueOf(position), a.toString(), a.toString()));
+                position++;
+            }
+
+            recyclerView.setAdapter(new MyGroupsRecyclerViewAdapter(groupnames, mListener));
         }
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {

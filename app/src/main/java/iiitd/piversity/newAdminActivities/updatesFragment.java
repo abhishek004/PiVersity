@@ -6,13 +6,26 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import iiitd.piversity.R;
 import iiitd.piversity.newAdminActivities.Updates.UpdatesContent;
 import iiitd.piversity.newAdminActivities.Updates.UpdatesContent.UpdatesItem;
+import iiitd.piversity.parseModels.GroupClubPage;
+import iiitd.piversity.parseModels.PageUpdate;
 
 /**
  * A fragment representing a list of Items.
@@ -62,17 +75,83 @@ public class updatesFragment extends Fragment{
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            final RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            List groupnames = new ArrayList<>();
+            List x = ParseInstallation.getCurrentInstallation().getList("channels");
+            for(Object a : x){
+                Log.d("###", a.toString());
+                groupnames.add(a.toString());
+            }
+            ParseQuery<GroupClubPage> query = ParseQuery.getQuery(GroupClubPage.class);
+            query.whereContainedIn("name", groupnames);
+            query.findInBackground(new FindCallback<GroupClubPage>() {
+                public void done(List<GroupClubPage> itemList, ParseException e) {
+                    if (e == null) {
+                        if (!itemList.isEmpty()) {
+                            List y = new ArrayList<>();
+                            final Map namesidmap = new HashMap<>();
+                            for (int i = 0; i < itemList.size(); i++) {
+                                Log.d("####", itemList.get(i).getObjectId());
+                                y.add(itemList.get(i).getObjectId());
+                                namesidmap.put(itemList.get(i).getObjectId(), itemList.get(i).getName());
+                            }
+                            ParseQuery<PageUpdate> query2 = ParseQuery.getQuery(PageUpdate.class);
+                            query2.whereContainedIn("pageId", y);
+                            query2.findInBackground(new FindCallback<PageUpdate>() {
+                                public void done(List<PageUpdate> itemList, ParseException e) {
+                                    if (e == null) {
+                                        if (!itemList.isEmpty()) {
+                                            Map z = new HashMap<>();
+                                            for (int i = 0; i < itemList.size(); i++) {
+                                                Log.d("######", itemList.get(i).getInfo());
+                                                z.put(itemList.get(i).getPageId(), itemList.get(i).getInfo());
+                                            }
+                                            Map updates = new HashMap<>();
+
+                                            for (Object a : z.keySet()) {
+                                                updates.put(namesidmap.get(a.toString()), z.get(a.toString()));
+                                            }
+                                            populateitems(updates, recyclerView);
+                                            Log.d("updates size 1", Integer.toString(updates.size()));
+//                                        ParseQuery<PageUpdate> query = ParseQuery.getQuery(PageUpdate.class);
+//                                        query.whereContainedIn("pageId", Arrays.asList(y));
+                                        }
+                                    } else {
+                                        Log.d("item###", "Error: " + e.getMessage());
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        Log.d("item###", "Error: " + e.getMessage());
+                    }
+                }
+            });
+
             recyclerView.setAdapter(new MyupdatesRecyclerViewAdapter(UpdatesContent.ITEMS, mListener));
+
         }
         return view;
     }
 
+    private void populateitems(Map updates, RecyclerView recyclerView){
+        // Add some sample items.
+        List<UpdatesItem> ITEMS = new ArrayList<UpdatesItem>();
+        Integer position = 0;
+        Log.d("updates size 2", Integer.toString(updates.size()));
+        for(Object a: updates.keySet()){
+            Log.d("@@@", a.toString());
+            Log.d("@@@", updates.get(a).toString());
+            ITEMS.add(new UpdatesItem(String.valueOf(position), updates.get(a).toString(), a.toString() ));
+            position++;
+        }
+        recyclerView.setAdapter(new MyupdatesRecyclerViewAdapter(ITEMS, mListener));
+    }
 
     @Override
     public void onAttach(Context context) {

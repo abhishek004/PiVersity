@@ -27,40 +27,14 @@ public class GroupsContent {
      */
     public static final Map<String, GroupsItem> ITEM_MAP = new HashMap<String, GroupsItem>();
 
-    private static final int COUNT = 10;
+    private static final int COUNT = 1;
 
     static {
         // Add some sample items.
-        getData();
+        //getData();
         for (int i = 1; i <= COUNT; i++) {
             addItem(createDummyItem(i));
         }
-    }
-
-    private static void getData() {
-        ParseQuery<Student> query = ParseQuery.getQuery(Student.class);
-        query.whereEqualTo("user", ParseUser.getCurrentUser());
-        query.findInBackground(new FindCallback<Student>() {
-            public void done(List<Student> itemList, ParseException e) {
-                if (e == null) {
-                    if (!itemList.isEmpty()) {
-                        //Toast.makeText(StudentAdmin.this, "Data Received", Toast.LENGTH_SHORT).show();
-                        //updateProfile(itemList.get(0));
-                    } else {
-                        Student s = new Student();
-                        s.setUser(ParseUser.getCurrentUser());
-                        //initialEdit = true;
-//                        Toast.makeText(StudentAdmin.this, "Please complete your profile", Toast.LENGTH_SHORT).show();
-                        s.saveInBackground();
-                    }
-                    // Access the array of results here
-                    //String firstItemId = itemList.get(0).getObjectId();
-
-                } else {
-                    Log.e("item", "Error: " + e.getMessage());
-                }
-            }
-        });
     }
 
 
@@ -70,7 +44,7 @@ public class GroupsContent {
     }
 
     private static GroupsItem createDummyItem(int position) {
-        return new GroupsItem(String.valueOf(position), "gorupsItem " + position, makeDetails(position));
+        return new GroupsItem(String.valueOf(position), "No Groups Found!", "You haven't joined any groups yet.");
     }
 
     private static String makeDetails(int position) {
