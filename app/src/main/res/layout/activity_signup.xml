@@ -18,116 +18,167 @@
             android:layout_height="250dp"
             android:layout_marginBottom="1dp"
             android:layout_gravity="center_horizontal" />
-        
-        <LinearLayout
-            android:orientation="vertical"
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Username"
-                android:id="@+id/textView2" />
-
-            <EditText
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/usernameEditText"
-                android:layout_gravity="center_horizontal"
-                android:singleLine="true" />
+                android:inputType="textCapWords"
+                android:hint="Name" />
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp">-->
 
-        <LinearLayout
-            android:orientation="vertical"
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Username"-->
+                <!--android:id="@+id/textView2" />-->
+
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/usernameEditText"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:singleLine="true" />-->
+
+        <!--</LinearLayout>-->
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-
-            android:layout_margin="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password"
-                android:id="@+id/textView3"
-                android:layout_gravity="center_vertical" />
-
-            <EditText
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/passEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/passEditText"
-                android:password="true"
-                android:singleLine="false" />
-        </LinearLayout>
+                android:inputType="textPassword"
+                android:hint="Password"/>
+        </android.support.design.widget.TextInputLayout>
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
 
-        <LinearLayout
-            android:orientation="vertical"
+            <!--android:layout_margin="10dp">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Password"-->
+                <!--android:id="@+id/textView3"-->
+                <!--android:layout_gravity="center_vertical" />-->
+
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/passEditText"-->
+                <!--android:password="true"-->
+                <!--android:singleLine="false" />-->
+        <!--</LinearLayout>-->
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-
-            android:layout_margin="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Confirm Password"
-                android:id="@+id/textView4" />
-
-            <EditText
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/cPassEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cPassEditText"
-                android:password="true" />
+                android:inputType="textPassword"
+                android:hint="Confirm Password"/>
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
 
-        <LinearLayout
-            android:orientation="vertical"
+            <!--android:layout_margin="10dp">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Confirm Password"-->
+                <!--android:id="@+id/textView4" />-->
+
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/cPassEditText"-->
+                <!--android:password="true" />-->
+
+        <!--</LinearLayout>-->
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:id="@+id/textView5" />
-
-            <EditText
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:ems="10"
-                android:id="@+id/emailEditText"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
+                android:hint="Email"
+                android:inputType="textEmailAddress"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Email"-->
+                <!--android:id="@+id/textView5" />-->
+
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:inputType="textEmailAddress"-->
+                <!--android:ems="10"-->
+                <!--android:id="@+id/emailEditText"-->
+                <!--android:layout_gravity="center_horizontal" />-->
+        <!--</LinearLayout>-->
+
+
 
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radioGroup">
+            android:id="@+id/radioGroup"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp">
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Student"
                 android:id="@+id/studentRadioButton"
-                android:checked="false" />
+                android:checked="true"/>
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Organisation"
                 android:id="@+id/orgRadioButton"
-                android:checked="false" />
+                android:checked="false"
+                android:layout_marginLeft="100dp"/>
         </RadioGroup>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Sign Up"
             android:id="@+id/signupButton2"

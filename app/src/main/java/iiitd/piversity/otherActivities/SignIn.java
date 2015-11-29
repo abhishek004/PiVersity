@@ -58,6 +58,11 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    public void onSignUpClicked(){
+        Intent intent = new Intent(SignIn.this, SignUp.class);
+        startActivity(intent);
+    }
+
 
     public void onSigninClicked(){
         EditText username = (EditText)findViewById(R.id.signinUserEdit);
